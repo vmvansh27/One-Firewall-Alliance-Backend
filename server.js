@@ -19,9 +19,12 @@ app.use("/api/auth", authRoutes);
 app.use("/api/deals", dealRoutes);
 
 // Connect MongoDB
-mongoose.connect(MONGO_URI)
-  .then(() => console.log("MongoDB Connected"))
-  .catch((err) => console.error("MongoDB Connection Error:", err));
+mongoose.connect(process.env.MONGO_URI, {
+     useNewUrlParser: true,
+     useUnifiedTopology: true,
+ })
+     .then(() => console.log("MongoDB Connected"))
+     .catch((err) => console.error("Mongo Error", err));
 
 // Start server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
